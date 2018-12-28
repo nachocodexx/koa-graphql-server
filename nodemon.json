@@ -1,0 +1,9 @@
+{
+    "watch": "src/",
+    "ext": "ts",
+    "ignore": [
+        "./dist",
+        "node_modules"
+    ],
+    "exec": "yarn build && yarn start"
+}

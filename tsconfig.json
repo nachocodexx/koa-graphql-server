@@ -1,0 +1,28 @@
+{
+    "compilerOptions": {
+        "outDir": "./dist",
+        "typeRoots": [
+            "./node_modules/@types",
+            "./node_modules/@types/koa-bodyparser"
+        ],
+        "lib": [
+            "es6"
+        ],
+        "types": [
+            "reflect-metadata"
+        ],
+        // "strict": true,
+        "allowJs": true,
+        "target": "es6",
+        "module": "commonjs",
+        "noImplicitAny": true,
+        "moduleResolution": "node",
+        "sourceMap": true,
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true
+    },
+    "exclude": [
+        "./node_modules",
+        "./src/__test__/*"
+    ]
+}
