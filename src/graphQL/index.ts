@@ -1,36 +1,19 @@
 const { ApolloServer } = require('apollo-server-koa')
 import { makeExecutableSchema } from 'graphql-tools'
 import userResolvers from './resolvers/user.resolver';
-const User = require('./schemas/user.schema');
+import IndexResolvers from './resolvers/index.resolver'
 const merge = require('lodash.merge');
-const typeDefs = require('./schemas/query.schema');
+import { importSchema } from 'graphql-import'
+import * as path from 'path'
 
 
-const Query = typeDefs
-
-const resolvers = {
-    Query: {
-        hello(obj: any, args: any, ctx: any): string {
-            console.log(args);
-            return `Hello, ${args.name ? args.name : 'World'}! :)`
-        },
-        bye(obj: any, args: any, ctx: any) {
-            return `Bye ${args.name ? args.name : 'World!'}`
-        },
-        test(obj: any, args: any, ctx: any) {
-            return 'TEST! WORKS!'
-        }
-    }
-}
-
-
-
+const Query = importSchema(path.resolve(__dirname, 'schemas', 'query.schema.graphql'))
 
 
 
 const schema = makeExecutableSchema({
-    typeDefs: [Query, User],
-    resolvers: merge(resolvers, userResolvers)
+    typeDefs: [Query],
+    resolvers: merge(IndexResolvers, userResolvers)
 })
 
 export const apolloServer = new ApolloServer({ schema })

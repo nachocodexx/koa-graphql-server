@@ -4,6 +4,9 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 
 const config = {
+    node: {
+        __dirname: true
+    },
     stats: "errors-only",
     target: 'node',
     externals: [nodeExternals()],
@@ -16,11 +19,11 @@ const config = {
                 use: 'ts-loader',
                 exclude: /node_modules/
             },
-            {
-                exclude: /node_modules/,
-                test: /\.gql$/,
-                use: 'graphql-import-loader'
-            }
+            // {
+            //     exclude: /node_modules/,
+            //     test: /\.gql$/,
+            //     use: 'graphql-import-loader'
+            // }
         ]
     },
     resolve: {

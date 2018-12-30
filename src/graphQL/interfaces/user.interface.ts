@@ -9,5 +9,5 @@ export interface User {
     isLoggedIn?: boolean,
     isActive?: boolean,
     isBlocked?: boolean
-
+    fullname?: string
 }

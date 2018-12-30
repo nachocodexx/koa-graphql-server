@@ -10,7 +10,14 @@ type User {
     isLoggedIn:Boolean
     isActive:Boolean
     isBlocked:Boolean
+    fullname:String
+    createdAt: String
+    updatedAt: String
+    
 }
+
+
+
 
 input UserInput {
     firstName: String!
@@ -19,11 +26,4 @@ input UserInput {
     email: String!
     password: String!
 }
-
-type Mutation {
-    signup(user:UserInput!): User 
-}
-
-
-
 

@@ -16,7 +16,9 @@ export class UserHelpers {
 
     @Inject private securityService: SecurityService
 
-    constructor() { }
+    async findAll(): Promise<IUserDocument[]> {
+        return await User.find({}).lean().exec()
+    }
 
     async authenticate({ email, password }: Credentials): Promise<AuthResponse> {
         try {

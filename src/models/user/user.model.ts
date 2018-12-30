@@ -1,9 +1,7 @@
 import { Schema, model, SchemaOptions } from 'mongoose'
 import { IUserDocument } from './user.interface'
-// import { hashPassword } from '../../helpers/user.helpers';
 import { compareSync } from 'bcrypt';
 import { preSave } from './user.callbacks';
-// const tooavatar = require('cartoon-avatar')
 
 const options: SchemaOptions = {
     toJSON: { virtuals: true },
@@ -28,12 +26,12 @@ const UserSchema: Schema = new Schema({
 
 
 class User {
-    firstname: string
-    lastname: string
+    firstName: string
+    lastName: string
     password: string
 
     get fullname(): string {
-        return `${this.firstname} ${this.lastname}`
+        return `${this.firstName} ${this.lastName}`
     }
     comparePassword(password: string): boolean {
         return compareSync(password, this.password)

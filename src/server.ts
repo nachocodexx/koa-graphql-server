@@ -21,9 +21,6 @@ class KoaServer extends Koa {
 
     constructor(port: number) {
         super()
-        // this.app = new Koa()
-        // apolloServer
-
         this.port = port
         //INIT SOCKET.IO
         if (process.env.NODE_ENV === 'dev' || process.env.NODE_ENV === 'production')

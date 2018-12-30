@@ -1,5 +1,0 @@
-type Query  { 
-    hello(name:String):String,
-    bye(name:String):String,
-    test:String
-}

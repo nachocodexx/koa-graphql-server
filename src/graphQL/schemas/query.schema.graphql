@@ -1,0 +1,15 @@
+# import {User,UserInput} from "user.schema.graphql"
+type Query  { 
+    hello(name:String):String
+    bye(name:String):String
+    test:String
+    allUsers:[User]
+}
+
+
+
+
+
+type Mutation {
+    signup(user:UserInput!): User 
+}
