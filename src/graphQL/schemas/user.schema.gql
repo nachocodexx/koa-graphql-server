@@ -1,0 +1,29 @@
+
+type User {
+    _id:ID
+    avatar:String
+    firstName:String!
+    lastName:String!
+    gender:String!
+    email:String!
+    password:String!
+    isLoggedIn:Boolean
+    isActive:Boolean
+    isBlocked:Boolean
+}
+
+input UserInput {
+    firstName: String!
+    lastName: String!
+    gender: String!
+    email: String!
+    password: String!
+}
+
+type Mutation {
+    signup(user:UserInput!): User 
+}
+
+
+
+

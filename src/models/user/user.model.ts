@@ -16,8 +16,8 @@ const options: SchemaOptions = {
 
 const UserSchema: Schema = new Schema({
     avatar: { type: String },
-    firstname: { type: String, required: true },
-    lastname: { type: String, required: true },
+    firstName: { type: String, required: true },
+    lastName: { type: String, required: true },
     gender: { type: String, enum: ['M', 'F'], default: 'M' },
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },

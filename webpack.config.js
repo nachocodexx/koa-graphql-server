@@ -12,14 +12,19 @@ const config = {
     module: {
         rules: [
             {
-                test: /\.ts/,
+                test: /\.ts$/,
                 use: 'ts-loader',
                 exclude: /node_modules/
+            },
+            {
+                exclude: /node_modules/,
+                test: /\.gql$/,
+                use: 'graphql-import-loader'
             }
         ]
     },
     resolve: {
-        extensions: ['.ts', '.js']
+        extensions: ['.ts', '.js', '.gql']
     },
     output: {
         filename: 'bundle.js',

@@ -14,7 +14,7 @@ export function hashPassword(password: string): string {
 
 export class UserHelpers {
 
-    @Inject() private securityService: SecurityService
+    @Inject private securityService: SecurityService
 
     constructor() { }
 
@@ -43,8 +43,7 @@ export class UserHelpers {
     }
     // Create a user. 
     create(data: IUserModel): Promise<IUserDocument> {
-        const user: IUserDocument = new User(data)
-        return user.save()
+        return new User(data).save()
     }
     //Delete a specific user by their id. 
     async delete(_id: ID) {

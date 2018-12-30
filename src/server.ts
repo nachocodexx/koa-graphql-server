@@ -7,7 +7,7 @@ import { PORT } from './config'
 import './websockets/app.controller'
 import { createSocketServer } from 'socket-controllers'
 
-import { apolloServer } from './graphql';
+import { apolloServer } from './graphQL/';
 const KoaCors = require('@koa/cors');
 
 
