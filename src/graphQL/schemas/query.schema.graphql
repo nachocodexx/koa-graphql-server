@@ -1,15 +1,15 @@
-# import {User,UserInput} from "user.schema.graphql"
+# import {User,UserInput,UserUpdateInput} from "user.schema.graphql"
 type Query  { 
     hello(name:String):String
     bye(name:String):String
     test:String
     allUsers:[User]
+    user(_id:ID!):User
 }
-
-
-
 
 
 type Mutation {
     signup(user:UserInput!): User 
+    updateUser(_id:ID!,user:UserUpdateInput!):User
+    deleteUser(_id:ID!):ID
 }

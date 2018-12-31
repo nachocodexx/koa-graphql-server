@@ -16,9 +16,17 @@ export class UserHelpers {
 
     @Inject private securityService: SecurityService
 
-    async findAll(): Promise<IUserDocument[]> {
-        return await User.find({}).lean().exec()
+    // Return an array with all the users
+    findAll(): Promise<IUserDocument[]> {
+        return User.find({}).lean().exec()
     }
+
+    // Return only one user 
+    find(_id?: ID, email?: string): Promise<IUserDocument> {
+        return User.findById({ _id }).lean().exec()
+    }
+
+
 
     async authenticate({ email, password }: Credentials): Promise<AuthResponse> {
         try {
@@ -47,14 +55,25 @@ export class UserHelpers {
     create(data: IUserModel): Promise<IUserDocument> {
         return new User(data).save()
     }
-    //Delete a specific user by their id. 
-    async delete(_id: ID) {
+    //Delete a specifics users by their _id field. 
+    async delete(_id: ID): Promise<ID> {
         try {
             const doc = await User.findByIdAndRemove(_id)
-            if (!doc) throw ({ status: 401, message: `User doesn't exist` })
-
+            if (!doc) throw ({ status: 404, message: `User doesn't exist` })
+            return _id
         } catch (error) {
             throw { message: 'Server error :(', status: 500 }
+        }
+    }
+
+    async update(_id: ID, data: Partial<IUserModel>) {
+        try {
+            const doc = await User.findOneAndUpdate({ _id }, data, { new: true })
+            if (!doc) throw ({ status: 404, message: `User doesn't exist` })
+            return doc
+        } catch (error) {
+            throw { message: 'Something went wrong :(', status: 401 }
+
         }
     }
 }

@@ -16,4 +16,4 @@ const schema = makeExecutableSchema({
     resolvers: merge(IndexResolvers, userResolvers)
 })
 
-export const apolloServer = new ApolloServer({ schema })
+export const apolloServer = new ApolloServer({ schema, context: ({ ctx }: any) => ({ ctx }) })

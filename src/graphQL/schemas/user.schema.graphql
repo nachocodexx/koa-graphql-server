@@ -18,6 +18,14 @@ type User {
 
 
 
+input UserUpdateInput {
+    firstName: String
+    lastName: String
+    gender: String
+    email: String
+    password: String
+    avatar: String 
+}
 
 input UserInput {
     firstName: String!
