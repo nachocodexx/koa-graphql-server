@@ -28,9 +28,11 @@ You'll need to install the following:
 
 #### Installing:
  You should write down the following commands:
-**@Recommended [Yarn]**
+ 
+   **@Recommended [Yarn]**
 
      yarn install
+
    **@Other form [npm]**
 
     npm install
