@@ -5,7 +5,6 @@ export class IndexResolvers {
 
 
     private hello(obj: any, args: any, ctx: any): string {
-        console.log(args);
         return `Hello, ${args.name ? args.name : 'World'}! :)`
     }
     private bye(obj: any, args: any, ctx: any): string {
