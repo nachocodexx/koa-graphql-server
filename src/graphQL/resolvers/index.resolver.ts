@@ -11,9 +11,7 @@ export class IndexResolvers {
         return `Bye ${args.name ? args.name : 'World!'}`
     }
 
-    private test(obj: any, args: any, ctx: any): string {
-        return 'TEST! WORKS!'
-    }
+
 
     get resolvers() {
 
@@ -22,7 +20,6 @@ export class IndexResolvers {
             Query: {
                 hello: this.hello,
                 bye: this.bye,
-                test: this.test
             }
         }
     }

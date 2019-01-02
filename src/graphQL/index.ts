@@ -6,20 +6,11 @@ const merge = require('lodash.merge');
 import { importSchema } from 'graphql-import'
 import { applyMiddleware } from 'graphql-middleware'
 import * as path from 'path'
-
+import middlewares from './middlewares'
 
 const Query = importSchema(path.resolve(__dirname, 'schemas', 'query.schema.graphql'))
 
 
-const testMiddleware = {
-    Query: {
-        async hello(resolve: any, parent: any, args: any, context: any, info: any) {
-            console.log(args);
-
-            return await resolve(parent, { name: "TEST" }, context, info)
-        }
-    }
-}
 
 const schema = applyMiddleware(
     //SCHEMA 
@@ -27,10 +18,10 @@ const schema = applyMiddleware(
         typeDefs: [Query],
         resolvers: merge(IndexResolvers, userResolvers)
     }),
-    testMiddleware
+    ...middlewares
 )
 
 
 
-
+// Apollo server (graphQL Schema and Koa context)
 export const apolloServer = new ApolloServer({ schema, context: ({ ctx }: any) => ({ ctx }) })

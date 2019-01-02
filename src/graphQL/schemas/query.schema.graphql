@@ -2,7 +2,6 @@
 type Query  { 
     hello(name:String):String
     bye(name:String):String
-    test:String
     allUsers:[User]
     user(_id:ID!):User
 }
