@@ -10,6 +10,7 @@ async function isAuth(resolve: any, parent: any, args: any, ctx: any, info: any)
     const _ctx: Context = ctx.ctx,
         token: string = _ctx.headers.authorization.split(' ')[1];
     try {
+        const { role, sub } = await decodeToken(token)
         console.log("IS AUTH MIDDLEWARE WORKS")
         console.log(token);
         return await resolve(parent, args, ctx, info)

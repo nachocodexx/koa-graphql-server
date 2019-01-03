@@ -7,7 +7,7 @@ export function preSave(next: Function) {
     if (user.isNew) {
         user.avatar = tooavatar.generate_avatar({ gender: user.gender === 'M' ? 'male' : 'female' })
         user.password = hashPassword(user.password)
-        next()
+        return next()
     }
 
     if (!user.isModified('password')) return next()

@@ -34,6 +34,7 @@ class User {
         return `${this.firstName} ${this.lastName}`
     }
     comparePassword(password: string): boolean {
+
         return compareSync(password, this.password)
     }
 }

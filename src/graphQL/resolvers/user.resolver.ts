@@ -23,14 +23,18 @@ class UserResolvers {
     private deleteUser(obj: any, { _id }: any, ctx: any, info: any) {
         return this._.delete(_id)
     }
+    private signin(obj: any, { email, password }: any, ctx: any, info: any) {
 
+        return this._.authenticate({ email, password })
+    }
     // 
     get resolvers() {
         return {
             Mutation: {
                 signup: this.signup,
+                signin: this.signin,
                 updateUser: this.updateUser,
-                deleteUser: this.deleteUser
+                deleteUser: this.deleteUser,
             },
             Query: {
                 allUsers: this.allUsers,

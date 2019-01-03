@@ -16,6 +16,10 @@ type User {
     
 }
 
+type AuthenticationResponse {
+    user:User,
+    token:String
+}
 
 
 input UserUpdateInput {
@@ -34,4 +38,5 @@ input UserInput {
     email: String!
     password: String!
 }
+
 

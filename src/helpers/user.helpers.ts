@@ -5,6 +5,7 @@ import { IUserModel, IUserDocument } from '../models/user/user.interface';
 import { ID, Credentials, AuthResponse } from '../types';
 import { Inject } from 'typescript-ioc';
 import { SecurityService } from '../security';
+import { UserInputError, ForbiddenError, ApolloError } from 'apollo-server-koa'
 
 export function hashPassword(password: string): string {
     const salt: string = genSaltSync(SALT_FACTOR)
@@ -28,21 +29,19 @@ export class UserHelpers {
 
 
 
-    async authenticate({ email, password }: Credentials): Promise<AuthResponse> {
+    async authenticate({ email, password }: Credentials): Promise<AuthResponse | ApolloError> {
         try {
             let user: IUserDocument = await User.findOneAndUpdate({ email }, { $set: { isLoggedIn: true } }, { new: true }).then((res: IUserDocument) => res);
 
-            if (!user) throw { message: `${email} doesn't exist.`, status: 401 };
-            else if (!user.comparePassword(password)) throw { message: `The password is incorrect.`, status: 401 };
-            else if (user.isBlocked) throw { message: 'For some reasons your account is temporarily blocked', status: 401 }
+            if (!user) return new ForbiddenError(`${email} doesn't exist.`)
+            else if (!user.comparePassword(password)) return new UserInputError("Password is incorrect")
+            else if (user.isBlocked) return new ForbiddenError(`For some reasons your account is temporarily blocked`)
             else if (user.isActive) {
                 //SET PASSWORD UNDEFINED
                 user.set('password', undefined, { strict: false });
                 return { user, token: this.securityService.generateToken(user._id, user.role) };
             }
-            else {
-                throw { message: 'For some reasons You deactived your account, Do you want to active again?', status: 441801 }
-            }
+            else return new ForbiddenError(`For some reasons You deactived your account, Do you want to active again?`)
 
         } catch (error) {
             throw error
