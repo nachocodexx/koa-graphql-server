@@ -8,6 +8,7 @@ import { applyMiddleware } from 'graphql-middleware'
 import * as path from 'path'
 import middlewares from './middlewares'
 
+
 const Query = importSchema(path.resolve(__dirname, 'schemas', 'query.schema.graphql'))
 
 

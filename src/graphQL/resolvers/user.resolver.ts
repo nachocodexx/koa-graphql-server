@@ -1,61 +1,47 @@
-import { Inject } from "typescript-ioc";
-import { UserHelpers } from "../../helpers/user.helpers";
-import autobind from 'autobind-decorator'
 import { IUserDocument } from "../../models/user/user.interface";
+import { ID, AuthResponse } from "../../types";
+import { Resolver, Mutation, Query } from "../decorators";
+import { create, update, find, findAll, authenticate, remove } from "../../helpers/user.helpers";
 
 
-@autobind
+@Resolver
 class UserResolvers {
-    @Inject private _: UserHelpers
-
 
     // This method create a new user.
-    private async signup(obj: any, { user }: any, ctx: any) {
-        const data: IUserDocument = await this._.create(user)
-        return data
+    @Mutation
+    private async signup(obj: any, { user }: any, ctx: any): Promise<IUserDocument> {
+        return create(user)
     }
 
     // This method update users by their _id field. 
-    private updateUser(obj: any, { _id, user }: any, ctx: any, info: any) {
-        return this._.update(_id, user)
+    @Mutation
+    private updateUser(obj: any, { _id, user }: any, ctx: any, info: any): Promise<IUserDocument> {
+        return update(_id, user)
     }
     // This method delete users by their _id field.  
-    private deleteUser(obj: any, { _id }: any, ctx: any, info: any) {
-        return this._.delete(_id)
+    @Mutation
+    private deleteUser(obj: any, { _id }: any, ctx: any, info: any): Promise<ID> {
+        return remove(_id)
     }
-    private signin(obj: any, { email, password }: any, ctx: any, info: any) {
-
-        return this._.authenticate({ email, password })
-    }
-    // 
-    get resolvers() {
-        return {
-            Mutation: {
-                signup: this.signup,
-                signin: this.signin,
-                updateUser: this.updateUser,
-                deleteUser: this.deleteUser,
-            },
-            Query: {
-                allUsers: this.allUsers,
-                user: this.user
-            }
-        }
+    @Mutation
+    private signin(obj: any, { email, password }: any, ctx: any, info: any): Promise<AuthResponse> {
+        return authenticate({ email, password })
     }
 
     // This method return all users in the database 
+    @Query
     private allUsers(obj: any, args: any, ctx: any): Promise<IUserDocument[]> {
-        return this._.findAll()
+        return findAll()
     }
 
     // this method return a user by his/her _id. 
+    @Query
     private user(obj: any, { _id }: any, ctx: any) {
         console.log(ctx);
-
-        return this._.find(_id)
+        return find(_id)
     }
 
 }
 
-// export only the resolvers 
-export default new UserResolvers().resolvers
+
+export default (<any>new UserResolvers()).resolvers

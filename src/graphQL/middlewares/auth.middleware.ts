@@ -1,35 +1,41 @@
 import { Context } from "koa";
-import { SecurityService } from '../../security'
-const { decodeToken } = new SecurityService()
-import { AuthenticationError } from 'apollo-server-koa'
+import { decodeToken } from "../../security";
 
 
 // Middleware function 
-async function isAuth(resolve: any, parent: any, args: any, ctx: any, info: any) {
-    // Get koa context and get headers. 
-    const _ctx: Context = ctx.ctx,
-        token: string = _ctx.headers.authorization.split(' ')[1];
-    try {
-        const { role, sub } = await decodeToken(token)
-        console.log("IS AUTH MIDDLEWARE WORKS")
-        console.log(token);
-        return await resolve(parent, args, ctx, info)
+const isAuth = (...roles: string[]) => {
 
-    } catch (error) {
-        console.log(error);
+    return async function (resolve: any, parent: any, args: any, ctx: any, info: any) {
+        // Get koa context and get headers. 
+        const _ctx: Context = ctx.ctx,
+            token: string = _ctx.headers.authorization ? _ctx.headers.authorization.split(' ')[1] : null;
+        try {
 
-        return new AuthenticationError(`You're not authorized to access.`)
+            const { role, sub } = await decodeToken(token)
+
+            if (roles.some(r => role === r)) {
+                console.log("YEAH!");
+            }
+
+            console.log(`IS AUTH MIDDLEWARE WORKS ${roles}`)
+            return await resolve(parent, args, ctx, info)
+
+        } catch (error) {
+            return error
+        }
+
+
+
     }
-
-
-
 }
+
+
 
 
 
 //
 export default {
     Query: {
-        hello: isAuth
+        hello: isAuth('admin')
     }
 }

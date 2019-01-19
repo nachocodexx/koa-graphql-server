@@ -1,8 +1,14 @@
 # import {User,UserInput,UserUpdateInput,AuthenticationResponse} from "user.schema.graphql"
+
+
 type Query  { 
+    """ It greet you if you pass your name."""
     hello(name:String):String
+    """It say good bye if you pass your name."""
     bye(name:String):String
+    """Fetches all the users."""
     allUsers:[User]
+    """Fetches an user given its ID"""
     user(_id:ID!):User
 }
 
