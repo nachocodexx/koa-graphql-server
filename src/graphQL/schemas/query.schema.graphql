@@ -17,5 +17,5 @@ type Mutation {
     signin(email:String,password:String):AuthenticationResponse
     signup(user:UserInput!): User 
     updateUser(_id:ID!,user:UserUpdateInput!):User
-    deleteUser(_id:ID!):ID
+    removeUser(_id:ID!):ID
 }

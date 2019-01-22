@@ -20,7 +20,7 @@ class UserResolvers {
     }
     // This method delete users by their _id field.  
     @Mutation
-    private deleteUser(obj: any, { _id }: any, ctx: any, info: any): Promise<ID> {
+    private removeUser(obj: any, { _id }: any, ctx: any, info: any): Promise<ID> {
         return remove(_id)
     }
     @Mutation

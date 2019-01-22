@@ -1,8 +1,7 @@
-import autobind from 'autobind-decorator'
 import { Resolver, Query } from '../decorators';
 
 @Resolver
-export class IndexResolvers {
+class IndexResolvers {
     @Query
     private hello(obj: any, args: any, ctx: any): string {
         return `Hello, ${args.name ? args.name : 'World'}! :)`

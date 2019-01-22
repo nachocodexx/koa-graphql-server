@@ -1,16 +1,18 @@
 # Koa-graphQL Template
-This project contains  Koa server, GraphQL, Socket.io and MongoDB as database,It follows a OOP(Oriented Object Programming) and Dependecy Injection to take advantages of the benefits of that  programming paradigm, I think that this template is a good structure for writing real time koa applications, not the best but it's good for small projects and I can safely say maybe medium projects, I've tested it  in small project for school, If someone want to use in his or her projects, I would be proud and glad, it uses the following: 
+This project contains  Koa server, GraphQL, Socket.io and MongoDB as database,It follows a OOP(Oriented Object Programming), I think this template is a good structure for writing Koa + GraphQL Apps, not the best but it's good for small projects and I can safely say maybe medium projects, I've tested it  in small project for school, If someone want to use in their projects, I would be proud and glad.: 
  
+## What's in the package?
 
-> Koa
-> 
-> Typescript + Dependency Injection
-> 
-> Socket.io
-> 
-> graphQL(Apollo)
-> 
-> MongoDB
+ - Koa
+ - Koa-Router
+ - Typescript
+ - Socket.io
+ - GraphQL
+ - Apollo-Server
+ - MongoDB(Mongoose)
+ - JWT 
+ - Jest
+ - Nodemon
 
 ## Getting Started
 
