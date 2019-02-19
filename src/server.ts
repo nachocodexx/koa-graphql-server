@@ -1,12 +1,6 @@
-// This is required for socket-controllers
-import 'reflect-metadata'
 import * as Koa from 'koa'
 import KoaBodyParser = require("koa-bodyparser");
 import { PORT } from './config'
-
-import './websockets/app.controller'
-import { createSocketServer } from 'socket-controllers'
-
 import { apolloServer } from './graphQL/';
 const KoaCors = require('@koa/cors');
 
@@ -22,17 +16,10 @@ class KoaServer extends Koa {
     constructor(port: number) {
         super()
         this.port = port
-        //INIT SOCKET.IO
-        if (process.env.NODE_ENV === 'dev' || process.env.NODE_ENV === 'production')
-            this.configSocketIO()
         // CONFIG KOA APP  / MIDDLEWARES
         this.setConfig()
         // INIT KOA ROUTER 
         this.initRouter()
-    }
-
-    private configSocketIO() {
-        createSocketServer(7001)
     }
 
     //SET PLUGINS (MIDDLEWARES)

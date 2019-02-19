@@ -1,7 +1,7 @@
-import { Schema, model, SchemaOptions } from 'mongoose'
-import { IUserDocument } from './user.interface'
+import { Schema, model, SchemaOptions } from 'mongoose';
+import { IUserDocument } from '../typings/user';
 import { compareSync } from 'bcrypt';
-import { preSave } from './user.callbacks';
+import { preSave } from '../helpers/user.helpers';
 
 const options: SchemaOptions = {
     toJSON: { virtuals: true },

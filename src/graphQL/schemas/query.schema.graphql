@@ -1,4 +1,6 @@
 # import {User,UserInput,UserUpdateInput,AuthenticationResponse} from "user.schema.graphql"
+# import {Driver,Car,CarInput} from 'driver.schema.graphql';
+# import {ParkingLotProvider} from 'parkinglot-provider.schema.graphql';
 
 
 type Query  { 
@@ -14,8 +16,13 @@ type Query  {
 
 
 type Mutation {
+    selectCar(_id:ID):Boolean
+    removeCar(_id:ID):Boolean
+    updateCar(_id:ID):Boolean
+    addCars(cars:[CarInput!]):[ID]
     signin(email:String,password:String):AuthenticationResponse
-    signup(user:UserInput!): User 
+    logout(_id:ID):Boolean 
+    signup(user:UserInput!,isDriver:Boolean!):User  
     updateUser(_id:ID!,user:UserUpdateInput!):User
     removeUser(_id:ID!):ID
 }

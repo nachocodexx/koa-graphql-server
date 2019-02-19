@@ -1,0 +1,23 @@
+# import {User} from 'user.schema.graphql';
+
+type ParkingLot {
+    owner:ID!
+}
+
+type ParkingLotProvider implements User {
+    _id:ID
+    avatar:String
+    firstName:String!
+    lastName:String!
+    gender:String!
+    email:String!
+    password:String!
+    birthday: String!
+    isLoggedIn:Boolean
+    isActive:Boolean
+    isBlocked:Boolean
+    fullname:String
+    createdAt: String
+    updatedAt: String
+    parkingLots:[ParkingLot]
+}

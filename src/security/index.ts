@@ -1,6 +1,6 @@
 import { decode, encode } from 'jwt-simple'
 import * as moment from 'moment'
-import { ID, TokenDecodedPayload, TokenPayload, Payload } from '../types/'
+import { ID, TokenDecodedPayload, TokenPayload, Payload } from '../typings'
 import { SECRET_TOKEN } from '../config';
 import { ApolloError } from 'apollo-server-koa';
 import { ForbiddenError } from 'apollo-server-koa'

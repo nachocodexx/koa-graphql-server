@@ -1,5 +1,13 @@
 import { Schema } from 'mongoose'
-import { IUserDocument } from '../models/user/user.interface';
+import { IUserDocument } from './user';
+import { Context } from 'koa';
+
+
+
+interface AuthMiddlewareOptions {
+    _id: boolean
+}
+
 
 export interface TokenDecodedPayload {
     sub: string,
@@ -18,6 +26,8 @@ export interface IError {
 }
 
 export type ID = Schema.Types.ObjectId | string
+
+
 
 export interface Payload {
     sub: ID,
@@ -38,3 +48,8 @@ export type Credentials = {
 }
 
 
+
+export interface GraphQLContext {
+    _extensionStack: any,
+    ctx: Context
+}

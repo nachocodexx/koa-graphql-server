@@ -1,5 +1,4 @@
 import IndexResolvers from "./index.resolver";
-import userResolver from "./user.resolver";
 
 const merge = require('lodash.merge');
 
@@ -7,6 +6,17 @@ const merge = require('lodash.merge');
 
 export default merge(
     IndexResolvers,
-    userResolver
+    {
+        User: {
+            __resolveType(obj: any, ctx: any, info: any) {
+                switch (obj.role) {
+                    case 'driver':
+                        return 'Driver';
+                    case 'parkinglotprovider':
+                        return 'ParkingLotProvider'
+                }
+            }
+        }
+    }
 
 )

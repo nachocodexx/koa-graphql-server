@@ -8,9 +8,6 @@
         "lib": [
             "es6"
         ],
-        "types": [
-            "reflect-metadata"
-        ],
         // "strict": true,
         "allowJs": true,
         "target": "es6",

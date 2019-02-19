@@ -1,5 +1,8 @@
+# import {Car} from 'driver.schema.graphql';
+# import {ParkingLot} from 'parkinglot-provider.schema.graphql';
 
-type User {
+
+interface User {
     _id:ID
     avatar:String
     firstName:String!
@@ -13,8 +16,11 @@ type User {
     fullname:String
     createdAt: String
     updatedAt: String
+    birthday: String!
     
 }
+
+
 
 type AuthenticationResponse {
     user:User,
@@ -31,12 +37,27 @@ input UserUpdateInput {
     avatar: String 
 }
 
+
+input CarInput {
+    color:String!
+    licensePlate:String!
+}
+
+input ParkingLotInput {
+    owner:ID!
+}
+
+
 input UserInput {
     firstName: String!
     lastName: String!
     gender: String!
     email: String!
     password: String!
+    birthday: String!
+
+    cars:[CarInput]
+    parkingLot:ParkingLotInput
 }
 
 

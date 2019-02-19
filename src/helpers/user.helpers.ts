@@ -1,10 +1,12 @@
-import User from '../models/user/user.model'
+import User from '../models/user.model'
 import { genSaltSync, hashSync } from 'bcrypt';
 import { SALT_FACTOR } from '../config';
-import { IUserModel, IUserDocument } from '../models/user/user.interface';
-import { ID, Credentials, AuthResponse } from '../types';
+import { IUserModel, IUserDocument } from '../typings/user';
+import { ID, Credentials, AuthResponse } from '../typings/';
 import { UserInputError, ForbiddenError, ApolloError } from 'apollo-server-koa'
 import { generateToken } from '../security';
+const tooavatar = require('cartoon-avatar')
+
 
 export function hashPassword(password: string): string {
     const salt: string = genSaltSync(SALT_FACTOR)
@@ -71,5 +73,23 @@ export async function update(_id: ID, data: Partial<IUserModel>) {
     }
 }
 
+
+
+
+export function preSave(next: Function) {
+    const user = this as IUserDocument
+    if (user.isNew) {
+        user.avatar = tooavatar.generate_avatar({ gender: user.gender === 'M' ? 'male' : 'female' })
+        user.password = hashPassword(user.password)
+        return next()
+    }
+
+    if (!user.isModified('password')) return next()
+    else if (user.isModified('password')) {
+        user.password = hashPassword(user.password)
+        next()
+    }
+
+}
 
 

@@ -1,24 +1,37 @@
 import { Context } from "koa";
 import { decodeToken } from "../../security";
+import { AuthMiddlewareOptions } from "../../typings";
+import { ForbiddenError } from "apollo-server-koa";
 
 
-// Middleware function 
-const isAuth = (...roles: string[]) => {
 
+// Middleware Factory allows us to pass paramters 
+const isAuth = (roles: string[], options: AuthMiddlewareOptions = { _id: false }) => {
+
+    // Middleware 
     return async function (resolve: any, parent: any, args: any, ctx: any, info: any) {
         // Get koa context and get headers. 
         const _ctx: Context = ctx.ctx,
             token: string = _ctx.headers.authorization ? _ctx.headers.authorization.split(' ')[1] : null;
+
+
+
         try {
 
-            const { role, sub } = await decodeToken(token)
+            // decode token to get user info(sub and role).
+            const { role, sub } = await decodeToken(token);
 
-            if (roles.some(r => role === r)) {
-                console.log("YEAH!");
+            //
+            if (options._id)
+                _ctx.state = { _id: sub };
+
+
+            if (roles.some(r => role === r) || roles[0] === '*') {
+                return await resolve(parent, args, ctx, info);
+            } else {
+                return new ForbiddenError("No te quieras pasar de verga no puedes.");
             }
 
-            console.log(`IS AUTH MIDDLEWARE WORKS ${roles}`)
-            return await resolve(parent, args, ctx, info)
 
         } catch (error) {
             return error
@@ -35,7 +48,10 @@ const isAuth = (...roles: string[]) => {
 
 //
 export default {
-    Query: {
-        hello: isAuth('admin')
+    Query: {},
+    Mutation: {
+        addCars: isAuth(['driver'], { _id: true }),
+        logout: isAuth(['*']),
+        selectCar: isAuth(['driver'], { _id: true })
     }
 }

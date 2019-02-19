@@ -1,5 +1,5 @@
 import { IError } from "../types";
-import User from '../models/user/user.model'
+import User from '../models/user.model'
 
 export async function checkEmailExists(email: string) {
     const count: number = await User.count({ email }).then((res: number) => res)
