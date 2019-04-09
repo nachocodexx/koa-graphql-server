@@ -1,20 +1,22 @@
-import { Resolver, Query, ResolverFactory } from '../decorators';
-import { GraphQLContext } from '../../typings';
-// import { Resolver, Query } from 'koa-graphql-decorators';
-
+import { Resolver, Query, ResolverFactory, Mutation } from "../decorators";
+import { GraphQLContext } from "../../typings";
+import { create } from "../../helpers/user.helpers";
 
 @Resolver
 class IndexResolvers extends ResolverFactory {
-    @Query
-    private hello(obj: any, args: any, ctx: GraphQLContext): string {
-        return `Hello, ${args.name ? args.name : 'World'}! :)`
-    }
-    @Query
-    private bye(obj: any, args: any, ctx: GraphQLContext): string {
-        return `Bye ${args.name ? args.name : 'World!'}`
-    }
+  @Query
+  hello(_: any, args: any, ctx: GraphQLContext): string {
+    return `Hello, ${args.name ? args.name : "World"}! :)`;
+  }
+  @Query
+  bye(_: any, args: any, ctx: GraphQLContext): string {
+    return `Bye ${args.name ? args.name : "World!"}`;
+  }
+
+  @Mutation
+  signup(_: any, args: any, ctx: GraphQLContext) {
+    return create(args.user);
+  }
 }
 
-
-
-export default new IndexResolvers().getContext()
+export default new IndexResolvers().getContext();

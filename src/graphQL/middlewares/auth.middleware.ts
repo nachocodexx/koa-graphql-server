@@ -6,18 +6,10 @@ import { ForbiddenError } from "apollo-server-koa";
 // Middleware Factory allows us to pass paramters
 const isAuth = (options: AuthMiddlewareOptions = { _id: true }) => {
   // Middleware
-  return async function(
-    resolve: any,
-    parent: any,
-    args: any,
-    ctx: any,
-    info: any
-  ) {
+  return async function(resolve: any, parent: any, args: any, ctx: any, info: any) {
     // Get koa context and get headers.
     const _ctx: Context = ctx.ctx,
-      token: string = _ctx.headers.authorization
-        ? _ctx.headers.authorization.split(" ")[1]
-        : null;
+      token: string = _ctx.headers.authorization ? _ctx.headers.authorization.split(" ")[1] : null;
     if (!token) throw new ForbiddenError(`You aren't authorized.`);
 
     try {
@@ -36,9 +28,5 @@ const isAuth = (options: AuthMiddlewareOptions = { _id: true }) => {
 //
 export default {
   Query: {},
-  Mutation: {
-    addCars: isAuth(),
-    logout: isAuth(),
-    selectCar: isAuth()
-  }
+  Mutation: {}
 };

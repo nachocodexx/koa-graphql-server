@@ -1,28 +1,16 @@
 # import {User,UserInput,UserUpdateInput,AuthenticationResponse} from "user.schema.graphql"
 
 type Query {
-  """
-  It greets you if you pass your name.
-  """
   hello(name: String): String
-  """
-  It says good bye if you pass your name.
-  """
   bye(name: String): String
-  """
-  Fetches all the users.
-  """
   allUsers: [User]
-  """
-  Fetches an user given its ID
-  """
   user(_id: ID!): User
 }
 
 type Mutation {
   signin(email: String, password: String): AuthenticationResponse
   logout(_id: ID): Boolean
-  signup(user: UserInput!, isDriver: Boolean!): User
+  signup(user: UserInput!): User
   updateUser(_id: ID!, user: UserUpdateInput!): User
   removeUser(_id: ID!): ID
 }

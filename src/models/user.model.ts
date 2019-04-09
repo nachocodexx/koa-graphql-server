@@ -29,13 +29,10 @@ export class User extends Typegoose {
   password: string;
   @prop({ default: false })
   isLoggedIn!: boolean;
-
   @prop({ default: false })
   isBlocked!: boolean;
-
   @prop({ default: true })
   isActive!: boolean;
-
   @prop({ enum: ["M", "F"] })
   gender: string;
 
