@@ -4,7 +4,7 @@ import { AuthMiddlewareOptions } from "../../typings";
 import { ForbiddenError } from "apollo-server-koa";
 
 // Middleware Factory allows us to pass paramters
-const isAuth = (options: AuthMiddlewareOptions = { _id: true }) => {
+export const isAuth = (options: AuthMiddlewareOptions = { _id: true }) => {
   // Middleware
   return async function(resolve: any, parent: any, args: any, ctx: any, info: any) {
     // Get koa context and get headers.
@@ -23,10 +23,4 @@ const isAuth = (options: AuthMiddlewareOptions = { _id: true }) => {
       return error;
     }
   };
-};
-
-//
-export default {
-  Query: {},
-  Mutation: {}
 };

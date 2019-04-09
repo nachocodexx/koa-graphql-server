@@ -1,4 +1,3 @@
-import isAuth from './auth.middleware'
+import { indexMiddlewares } from "../resolvers/index.resolver";
 
-
-export default [isAuth]
+export default [...indexMiddlewares];
