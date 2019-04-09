@@ -1,63 +1,39 @@
-# import {Car} from 'driver.schema.graphql';
-# import {ParkingLot} from 'parkinglot-provider.schema.graphql';
-
-
 interface User {
-    _id:ID
-    avatar:String
-    firstName:String!
-    lastName:String!
-    gender:String!
-    email:String!
-    password:String!
-    isLoggedIn:Boolean
-    isActive:Boolean
-    isBlocked:Boolean
-    fullname:String
-    createdAt: String
-    updatedAt: String
-    birthday: String!
-    
+  _id: ID
+  avatar: String
+  firstName: String!
+  lastName: String!
+  gender: String!
+  email: String!
+  password: String!
+  isLoggedIn: Boolean
+  isActive: Boolean
+  isBlocked: Boolean
+  fullname: String
+  createdAt: String
+  updatedAt: String
+  birthday: String!
 }
-
-
 
 type AuthenticationResponse {
-    user:User,
-    token:String
+  user: User
+  token: String
 }
-
 
 input UserUpdateInput {
-    firstName: String
-    lastName: String
-    gender: String
-    email: String
-    password: String
-    avatar: String 
+  firstName: String
+  lastName: String
+  gender: String
+  email: String
+  password: String
+  avatar: String
 }
-
-
-input CarInput {
-    color:String!
-    licensePlate:String!
-}
-
-input ParkingLotInput {
-    owner:ID!
-}
-
 
 input UserInput {
-    firstName: String!
-    lastName: String!
-    gender: String!
-    email: String!
-    password: String!
-    birthday: String!
-
-    cars:[CarInput]
-    parkingLot:ParkingLotInput
+  firstName: String!
+  lastName: String!
+  gender: String!
+  email: String!
+  password: String!
+  birthday: String!
 }
-
-
