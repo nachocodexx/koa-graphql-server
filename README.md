@@ -6,7 +6,6 @@ This project contains  Koa server, GraphQL, Socket.io and MongoDB as database,It
  - Koa
  - Koa-Router
  - Typescript
- - Socket.io
  - GraphQL
  - Apollo-Server
  - MongoDB(Mongoose)
