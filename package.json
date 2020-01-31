@@ -54,7 +54,7 @@
     "koa-bodyparser": "^3.2.0",
     "koa-logger": "^3.2.0",
     "koa-router": "^7.4.0",
-    "lodash.merge": "^4.6.1",
+    "lodash.merge": "^4.6.2",
     "moment": "^2.22.2",
     "mongoose": "^5.2.13",
     "reflect-metadata": "^0.1.13",
