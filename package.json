@@ -56,7 +56,7 @@
     "koa-router": "^7.4.0",
     "lodash.merge": "^4.6.2",
     "moment": "^2.22.2",
-    "mongoose": "^5.2.13",
+    "mongoose": "^5.7.5",
     "reflect-metadata": "^0.1.13",
     "socket-controllers": "^0.0.3",
     "socket.io": "^2.4.0",
