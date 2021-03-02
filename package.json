@@ -40,7 +40,7 @@
   },
   "dependencies": {
     "@koa/cors": "^2.2.3",
-    "apollo-server-koa": "^2.3.1",
+    "apollo-server-koa": "^2.14.2",
     "async": "^2.6.1",
     "autobind-decorator": "^2.1.0",
     "bcrypt": "^3.0.0",
