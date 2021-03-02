@@ -59,7 +59,7 @@
     "mongoose": "^5.2.13",
     "reflect-metadata": "^0.1.13",
     "socket-controllers": "^0.0.3",
-    "socket.io": "^2.1.1",
+    "socket.io": "^2.4.0",
     "typegoose": "^5.5.1"
   }
 }
